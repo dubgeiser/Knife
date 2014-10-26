@@ -1,0 +1,20 @@
+{
+    "name": "dubgeiser/knife",
+	"type": "library",
+    "description": "PHP lib with specific Fork CMS additions",
+    "require": {
+        "php": ">= 5.4.30"
+    },
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Per Juchtmans",
+            "email": "dubgeiser+knife@gmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"Knife\\": "."
+		}
+	}
+}
