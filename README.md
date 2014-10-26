@@ -8,3 +8,5 @@ library.
 
 Patches and pull requests are welcome if they are accompanied by test(s).
 
+
+[![Build Status](https://travis-ci.org/dubgeiser/Knife.svg)](https://travis-ci.org/dubgeiser/Knife)
