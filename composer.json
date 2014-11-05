@@ -5,7 +5,7 @@
     "require": {
         "php": ">= 5.4.30"
     },
-    "license": "BSD",
+    "license": "WTFPL",
     "authors": [
         {
             "name": "Per Juchtmans",
