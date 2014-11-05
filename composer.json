@@ -1,6 +1,6 @@
 {
     "name": "dubgeiser/knife",
-	"type": "library",
+    "type": "library",
     "description": "PHP lib with specific Fork CMS additions",
     "require": {
         "php": ">= 5.4.30"
@@ -12,9 +12,9 @@
             "email": "dubgeiser+knife@gmail.com"
         }
     ],
-	"autoload": {
-		"psr-4": {
-			"Knife\\": "."
-		}
-	}
+    "autoload": {
+        "psr-4": {
+            "Knife\\": "."
+        }
+    }
 }
