@@ -1,0 +1,22 @@
+{
+    "name": "dubgeiser/testknife",
+    "type": "app",
+    "description": "Test that Knife can be installed via composer.",
+    "require": {
+        "php": ">= 5.4.30",
+        "dubgeiser/knife": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:dubgeiser/Knife.git"
+        }
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Per Juchtmans",
+            "email": "dubgeiser+knife@gmail.com"
+        }
+    ]
+}
