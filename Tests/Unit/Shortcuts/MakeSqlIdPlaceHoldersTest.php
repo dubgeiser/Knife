@@ -15,4 +15,12 @@ class MakeSqlIdPlaceHoldersTest extends \PHPUnit_Framework_TestCase
             Shortcuts::makeSqlIdPlaceHolders($ids)
         );
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testThrowsExceptionOnEmptyList()
+    {
+        Shortcuts::makeSqlIdPlaceHolders(array());
+    }
 }
