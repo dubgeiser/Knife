@@ -9,7 +9,7 @@ namespace Knife;
  * name clashes (although namespaces should prevent this), so "Dict" it is.
  * It is a well-known term in the Python world.
  *
- * @author <per@wijs.be>
+ * @author <dubgeiser+knife@gmail.com>
  */
 class Dict
 {

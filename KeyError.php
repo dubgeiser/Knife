@@ -6,7 +6,7 @@ namespace Knife;
 /**
  * Error that will be thrown if a key does not exist in an array.
  *
- * @author <per@wijs.be>
+ * @author <dubgeiser+knife@gmail.com>
  */
 class KeyError extends \Exception
 {

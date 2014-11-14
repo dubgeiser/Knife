@@ -7,6 +7,8 @@ use Knife\Dict;
 
 /**
  * Only has 1 element (default value = 1), which can be accessed by the key 'a'.
+ *
+ * @author <dubgeiser+knife@gmail.com>
  */
 class ObjectImplementingArrayAccess implements \ArrayAccess
 {

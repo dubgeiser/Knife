@@ -7,6 +7,8 @@ use Knife\Dict;
 
 /**
  * Test Dict class.
+ *
+ * @author <dubgeiser+knife@gmail.com>
  */
 class DictTest extends \PHPUnit_Framework_TestCase
 {

@@ -10,7 +10,7 @@ use Frontend\Core\Engine\Model as FrontendModel;
 /**
  * Collection of often used code patterns in Fork.
  *
- * @author <per@wijs.be>
+ * @author <dubgeiser+knife@gmail.com>
  */
 class Shortcuts
 {

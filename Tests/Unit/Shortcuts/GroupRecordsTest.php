@@ -5,6 +5,9 @@ namespace Knife\Tests\Shortcuts;
 use Knife\Shortcuts;
 
 
+/**
+ * @author <dubgeiser+knife@gmail.com>
+ */
 class GroupRecordsTest extends \PHPUnit_Framework_TestCase
 {
     public function testGroupByExistingKey()
