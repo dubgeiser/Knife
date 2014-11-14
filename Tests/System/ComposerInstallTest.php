@@ -35,3 +35,4 @@ class ComposerInstallTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('123', $output);
     }
 }
+

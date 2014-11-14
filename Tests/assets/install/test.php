@@ -15,4 +15,3 @@ use Knife\Dict;
 $a = array('a' => '123');
 echo Dict::get($a, 'a'),
     "\n";
-
