@@ -32,6 +32,6 @@ class String
      */
     static function endsWith($subject, $what)
     {
-        return mb_substr($subject, -mb_strlen($what)) == $what;
+        return ($what == '') ? true : mb_substr($subject, -mb_strlen($what)) == $what;
     }
 }

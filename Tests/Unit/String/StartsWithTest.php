@@ -41,14 +41,10 @@ class StringStartsWithTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(String::startsWith($subject, "¨o¨o"));
     }
 
-    function test_TODO_DECIDE_ON_EMPTY_SEARCH()
+    public function testEveryStringStartsWithAnEmptyString()
     {
-        // TODO
-        // Decide on result:
-        //  - Always return true
-        //  - Always return false
-        //  - Throw an error
+        // Note: this mimics Python behaviour, on which startsWith() is based.
         $this->assertTrue(String::startsWith("whatever", ""));
-        $this->assertTrue(String::startsWith("doesn't matter", ""));
+        $this->assertTrue(String::startsWith("", ""));
     }
 }

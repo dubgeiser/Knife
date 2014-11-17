@@ -33,4 +33,11 @@ class StringEndsWithTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(String::endsWith("bobo", "bobobobo"));
     }
+
+    public function testEveryStringEndsWithAnEmptyString()
+    {
+        // Note: this mimics Python behaviour, on which endsWith() is based.
+        $this->assertTrue(String::endsWith("something", ""));
+        $this->assertTrue(String::endsWith("", ""));
+    }
 }
