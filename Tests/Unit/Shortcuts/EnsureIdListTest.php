@@ -29,8 +29,8 @@ class EnsureIdListTest extends \PHPUnit_Framework_TestCase
     public function testIntegersStayIntegers()
     {
         $this->assertSame(
-            array(1, 2, 3),
-            Shortcuts::ensureIdList(array(1, 2, 3))
+            array(4, 5, 6, 7),
+            Shortcuts::ensureIdList(array(4, 5, 6, 7))
         );
     }
 }
