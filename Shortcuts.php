@@ -168,32 +168,27 @@ class Shortcuts
      */
     public static function setMetaFromRecord(Header $header, array $record)
     {
-		// set meta
-		if(isset($record['meta_title']) && isset($record['meta_title_overwrite']))
-		{
-			$header->setPageTitle($record['meta_title'], ($record['meta_title_overwrite'] == 'Y'));
-		}
-		if(isset($record['meta_description']) && isset($record['meta_description_overwrite']))
-		{
-			$header->addMetaDescription($record['meta_description'], ($record['meta_description_overwrite'] == 'Y'));
-		}
-		if(isset($record['meta_keywords']) && isset($record['meta_keywords_overwrite']))
-		{
-			$header->addMetaKeywords($record['meta_keywords'], ($record['meta_keywords_overwrite'] == 'Y'));
-		}
+        // set meta
+        if(isset($record['meta_title']) && isset($record['meta_title_overwrite'])) {
+            $header->setPageTitle($record['meta_title'], ($record['meta_title_overwrite'] == 'Y'));
+        }
+        if(isset($record['meta_description']) && isset($record['meta_description_overwrite'])) {
+            $header->addMetaDescription($record['meta_description'], ($record['meta_description_overwrite'] == 'Y'));
+        }
+        if(isset($record['meta_keywords']) && isset($record['meta_keywords_overwrite'])) {
+            $header->addMetaKeywords($record['meta_keywords'], ($record['meta_keywords_overwrite'] == 'Y'));
+        }
 
-		// advanced SEO-attributes
-		if(isset($record['meta_data']['seo_index']))
-		{
-			$header->addMetaData(
-				array('name' => 'robots', 'content' => $record['meta_data']['seo_index'])
-			);
-		}
-		if(isset($record['meta_data']['seo_follow']))
-		{
-			$header->addMetaData(
-				array('name' => 'robots', 'content' => $record['meta_data']['seo_follow'])
-			);
-		}
+        // advanced SEO-attributes
+        if(isset($record['meta_data']['seo_index'])) {
+            $header->addMetaData(
+                array('name' => 'robots', 'content' => $record['meta_data']['seo_index'])
+            );
+        }
+        if(isset($record['meta_data']['seo_follow'])) {
+            $header->addMetaData(
+                array('name' => 'robots', 'content' => $record['meta_data']['seo_follow'])
+            );
+        }
     }
 }
