@@ -12,10 +12,33 @@ use Knife\Dict;
  */
 class DictTest extends \PHPUnit_Framework_TestCase
 {
+    /** @type array Simple dictionary for veryfying behaviour. */
+    private $dict = array('a' => 1);
+
+    /** @type array Dictionary with an object as value. */
+    private $dictWithObject;
+
+    /** @type array Dictionary with null as value. */
+    private $dictWithNull = array('a' => null);
+
+    /** @type \stdClass Basic object to use as value in a dictionary */
+    private $object;
+
+    public function setUp()
+    {
+        $this->object = new \stdClass();
+        $this->dictWithObject = array('a' => $this->object);
+    }
+
+    public function tearDown()
+    {
+        // nothing here... yet
+    }
+
+
     public function testAccessExistingKey()
     {
-        $a = array('a' => 1);
-        $this->assertSame(1, Dict::get($a, 'a'));
+        $this->assertSame(1, Dict::get($this->dict, 'a'));
     }
 
     /**
@@ -23,33 +46,26 @@ class DictTest extends \PHPUnit_Framework_TestCase
      */
     public function testAccessNonKeyThrowsKeyError()
     {
-        $a = array('a' => 1);
-        Dict::get($a, 'b');
+        Dict::get($this->dict, 'b');
     }
 
     public function testAccessNonKeyReturnsDefault()
     {
-        $a = array('a' => 1);
-        $this->assertNull(Dict::get($a, 'b', null));
+        $this->assertNull(Dict::get($this->dict, 'b', null));
     }
 
     public function testAccessKeyWithValueNullReturnsNull()
     {
-        $a = array('a' => null);
-        $this->assertNull(Dict::get($a, 'a'));
+        $this->assertNull(Dict::get($this->dictWithNull, 'a'));
     }
 
     public function testGetObjectReturnsReference()
     {
-        $o = new \stdClass();
-        $r = array('a' => $o,);
-        $this->assertSame($o, Dict::get($r, 'a'));
+        $this->assertSame($this->object, Dict::get($this->dictWithObject, 'a'));
     }
 
     public function testGetObjectWithDefaultReturnsReference()
     {
-        $o = new \stdClass();
-        $r = array('a' => $o,);
-        $this->assertSame($o, Dict::get($r, 'b', $o));
+        $this->assertSame($this->object, Dict::get($this->dictWithObject, 'b', $this->object));
     }
 }
