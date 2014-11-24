@@ -3,7 +3,7 @@
     "type": "library",
     "description": "PHP lib with specific Fork CMS additions",
     "require": {
-        "php": ">= 5.4.30"
+        "php": ">= 5.4.25"
     },
     "license": "WTFPL",
     "authors": [
