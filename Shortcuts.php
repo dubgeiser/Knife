@@ -44,7 +44,7 @@ class Shortcuts
             INNER JOIN meta m ON i.meta_id = m.id
             WHERE i.language = :language AND m.url = :slug";
         $params = array(
-            'language' => BL::getWorkingLanguage(),
+            'language' => \BL::getWorkingLanguage(),
             'slug' => $slug,
         );
         if ($id) {
@@ -52,7 +52,7 @@ class Shortcuts
             $params['id'] = $id;
         }
         $sql .= ' LIMIT 1';
-        return ((bool) BackendModel::getContainer()->get('database')->getVar($sql, $params))
+        return ((bool) \BackendModel::getContainer()->get('database')->getVar($sql, $params))
             ? self::makeUniqueSlug(BackendModel::addNumber($slug), $table, $id)
             : $slug;
     }
@@ -146,7 +146,7 @@ class Shortcuts
      */
     public static function getFrontendImages($frontendFilesSubDir, $filename)
     {
-        $folders = FrontendModel::getThumbnailFolders(
+        $folders = \FrontendModel::getThumbnailFolders(
             FRONTEND_FILES_PATH . $frontendFilesSubDir,
             self::INCLUDE_SOURCE_FOLDER
         );
@@ -166,32 +166,34 @@ class Shortcuts
      * @param Header $header
      * @param array  $record
      */
-    public static function setMetaFromRecord(Header $header, array $record)
+    public static function setMetaFromRecord(\Header $header, array $record)
     {
-        $header->setPageTitle(
-            $record['meta_title'],
-            ($record['meta_title_overwrite'] == 'Y')
-        );
-        $header->addMetaDescription(
-            $record['meta_description'],
-            ($record['meta_description_overwrite'] == 'Y')
-        );
-        $header->addMetaKeywords(
-            $record['meta_keywords'],
-            ($record['meta_keywords_overwrite'] == 'Y')
-        );
+        // set meta
+        if(isset($record['meta_title']) && isset($record['meta_description_overwrite']))
+        {
+            $header->setPageTitle($record['meta_title'], ($record['meta_description_overwrite'] == 'Y'));
+        }
+        if(isset($record['meta_description']) && isset($record['meta_description_overwrite']))
+        {
+            $header->addMetaDescription($record['meta_description'], ($record['meta_description_overwrite'] == 'Y'));
+        }
+        if(isset($record['meta_keywords']) && isset($record['meta_keywords_overwrite']))
+        {
+            $header->addMetaKeywords($record['meta_keywords'], ($record['meta_keywords_overwrite'] == 'Y'));
+        }
 
-        $header->addMetaData(
-            array(
-                'name' => 'robots',
-                'content' => $record['meta_data']['seo_index']
-            )
-        );
-        $header->addMetaData(
-            array(
-                'name' => 'robots',
-                'content' => $record['meta_data']['seo_follow']
-            )
-        );
+        // advanced SEO-attributes
+        if(isset($record['meta_data']['seo_index']))
+        {
+            $header->addMetaData(
+                array('name' => 'robots', 'content' => $record['meta_data']['seo_index'])
+            );
+        }
+        if(isset($record['meta_data']['seo_follow']))
+        {
+            $header->addMetaData(
+                array('name' => 'robots', 'content' => $record['meta_data']['seo_follow'])
+            );
+        }
     }
 }
