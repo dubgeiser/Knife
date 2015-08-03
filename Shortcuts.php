@@ -53,7 +53,7 @@ class Shortcuts
         }
         $sql .= ' LIMIT 1';
         return ((bool) \BackendModel::getContainer()->get('database')->getVar($sql, $params))
-            ? self::makeUniqueSlug(BackendModel::addNumber($slug), $table, $id)
+            ? static::makeUniqueSlug(BackendModel::addNumber($slug), $table, $id)
             : $slug;
     }
 
