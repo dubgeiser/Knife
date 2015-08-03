@@ -112,12 +112,15 @@ class Shortcuts
     /**
      * @param int[] $ids List of ID's in a database
      * @return string SQL placeholder to use in an 'IN ()' query
-     * @throws \Exception when passed an empty list, since 'IN ()' is invalid.
+     * @throws \UnexpectedValueException when passed an empty list,
+     *         since 'IN ()' is invalid.
      */
     public static function makeSqlIdPlaceHolders($ids)
     {
         if (empty($ids)) {
-            throw new \Exception("Cannot create valid SQL part if list is empty.");
+            throw new \UnexpectedValueException(
+                "Cannot create valid SQL part if list is empty."
+            );
         }
         return implode(', ', array_fill(0, count($ids), '?'));
     }

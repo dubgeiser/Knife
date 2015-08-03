@@ -20,7 +20,7 @@ class MakeSqlIdPlaceHoldersTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \UnexpectedValueException
      */
     public function testThrowsExceptionOnEmptyList()
     {
