@@ -8,7 +8,25 @@ use Knife\Shortcuts;
  */
 class SetMetaFromRecordTest extends \PHPUnit_Framework_TestCase
 {
+    const DO_NOT_CALL_ORIGINAL_CTOR = false;
+
+    static $metaPartToHeaderMethodMap = array(
+        'title' => 'setPageTitle',
+        'description' => 'addMetaDescription',
+        'keywords' => 'addMetaKeywords',
+    );
+
     public function setUp()
+    {
+        $this->setUpHeaderMock();
+    }
+
+    /**
+     * @internal Setting up header mock separately; we need to be able to restore
+     *           it in its original state.  (see expectMetaSetCorrectly())
+     *           2015-08-04 I have not found a way (yet) to do this in PHPUnit.
+     */
+    private function setUpHeaderMock()
     {
         $this->header = $this->getMock(
             'Frontend\Core\Engine\Header',
@@ -21,31 +39,38 @@ class SetMetaFromRecordTest extends \PHPUnit_Framework_TestCase
             ),
             array(), // not passing any args to ctor
             'Header',
-            false // do not call the original constructor
+            self::DO_NOT_CALL_ORIGINAL_CTOR
         );
     }
 
-    public function testSetPageTitleWithOverwrite()
+    /**
+     * @param string $metaPart Part of the meta key to be set.
+     * @param string $method Method that should be expected to be called on the
+     *        Header object (see $this->header setup).
+     */
+    private function expectMetaSetCorrectly($metaPart, $method)
     {
+        $expectedValue = 'test';
+        $keyMeta = "meta_$metaPart";
+        $keyMetaOverwrite = "{$keyMeta}_overwrite";
         $record = array(
-            'meta_title' => 'test',
-            'meta_title_overwrite' => 'Y'
+            $keyMeta => $expectedValue,
         );
-        $this->header->expects($this->once())
-            ->method('setPageTitle')
-            ->with('test', true);
-        Shortcuts::setMetaFromRecord($this->header, $record);
+        foreach (array('Y', 'N') as $overwriteValue) {
+            $record[$keyMetaOverwrite] = $overwriteValue;
+            $expectedOverwriteValue = $overwriteValue == 'Y';
+            $this->setUpHeaderMock();
+            $this->header->expects($this->once())
+                ->method($method)
+                ->with($expectedValue, $expectedOverwriteValue);
+            Shortcuts::setMetaFromRecord($this->header, $record);
+        }
     }
 
-    public function testSetPageTitleWithoutOverwrite()
+    public function testSettingMetaValues()
     {
-        $record = array(
-            'meta_title' => 'test',
-            'meta_title_overwrite' => 'N'
-        );
-        $this->header->expects($this->once())
-            ->method('setPageTitle')
-            ->with('test', false);
-        Shortcuts::setMetaFromRecord($this->header, $record);
+        foreach (self::$metaPartToHeaderMethodMap as $metaPart => $method) {
+            $this->expectMetaSetCorrectly($metaPart, $method);
+        }
     }
 }

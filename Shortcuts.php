@@ -180,24 +180,35 @@ class Shortcuts
         }
         if(isset($record['meta_description']) && isset($record['meta_description_overwrite']))
         {
-            $header->addMetaDescription($record['meta_description'], ($record['meta_description_overwrite'] == 'Y'));
+            $header->addMetaDescription(
+                $record['meta_description'],
+                ($record['meta_description_overwrite'] == 'Y')
+            );
         }
         if(isset($record['meta_keywords']) && isset($record['meta_keywords_overwrite']))
         {
-            $header->addMetaKeywords($record['meta_keywords'], ($record['meta_keywords_overwrite'] == 'Y'));
+            $header->addMetaKeywords(
+                $record['meta_keywords'],
+                ($record['meta_keywords_overwrite'] == 'Y')
+            );
         }
 
-        // advanced SEO-attributes
         if(isset($record['meta_data']['seo_index']))
         {
             $header->addMetaData(
-                array('name' => 'robots', 'content' => $record['meta_data']['seo_index'])
+                array(
+                    'name' => 'robots',
+                    'content' => $record['meta_data']['seo_index']
+                )
             );
         }
         if(isset($record['meta_data']['seo_follow']))
         {
             $header->addMetaData(
-                array('name' => 'robots', 'content' => $record['meta_data']['seo_follow'])
+                array(
+                    'name' => 'robots',
+                    'content' => $record['meta_data']['seo_follow']
+                )
             );
         }
     }
