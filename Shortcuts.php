@@ -171,10 +171,12 @@ class Shortcuts
      */
     public static function setMetaFromRecord(\Header $header, array $record)
     {
-        // set meta
-        if(isset($record['meta_title']) && isset($record['meta_description_overwrite']))
+        if(isset($record['meta_title']) && isset($record['meta_title_overwrite']))
         {
-            $header->setPageTitle($record['meta_title'], ($record['meta_description_overwrite'] == 'Y'));
+            $header->setPageTitle(
+                $record['meta_title'],
+                ($record['meta_title_overwrite'] == 'Y')
+            );
         }
         if(isset($record['meta_description']) && isset($record['meta_description_overwrite']))
         {
