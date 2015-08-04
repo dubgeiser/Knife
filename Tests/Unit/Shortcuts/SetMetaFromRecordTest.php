@@ -43,6 +43,40 @@ class SetMetaFromRecordTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testSettingMetaValues()
+    {
+        foreach (self::$metaPartToHeaderMethodMap as $metaPart => $method) {
+            $this->expectMetaSetCorrectly($metaPart, $method);
+        }
+    }
+
+    public function testSettingSeoValues()
+    {
+        $record = array(
+            'meta_data' => array(
+                'seo_index' => 'noindex',
+                'seo_follow' => 'nofollow',
+            )
+        );
+        $this->header->expects($this->exactly(2))
+            ->method('addMetaData')
+            ->withConsecutive(
+                array(
+                    array(
+                        'name' => 'robots',
+                        'content' => $record['meta_data']['seo_index']
+                    )
+                ),
+                array(
+                    array(
+                        'name' => 'robots',
+                        'content' => $record['meta_data']['seo_follow']
+                    )
+                )
+            );
+        Shortcuts::setMetaFromRecord($this->header, $record);
+    }
+
     /**
      * @param string $metaPart Part of the meta key to be set.
      * @param string $method Method that should be expected to be called on the
@@ -64,13 +98,6 @@ class SetMetaFromRecordTest extends \PHPUnit_Framework_TestCase
                 ->method($method)
                 ->with($expectedValue, $expectedOverwriteValue);
             Shortcuts::setMetaFromRecord($this->header, $record);
-        }
-    }
-
-    public function testSettingMetaValues()
-    {
-        foreach (self::$metaPartToHeaderMethodMap as $metaPart => $method) {
-            $this->expectMetaSetCorrectly($metaPart, $method);
         }
     }
 }
