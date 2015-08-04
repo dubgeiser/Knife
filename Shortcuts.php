@@ -171,21 +171,21 @@ class Shortcuts
      */
     public static function setMetaFromRecord(\Header $header, array $record)
     {
-        if(self::hasMeta($record, 'title'))
+        if(static::hasMeta($record, 'title'))
         {
             $header->setPageTitle(
                 $record['meta_title'],
                 ($record['meta_title_overwrite'] == 'Y')
             );
         }
-        if(self::hasMeta($record, 'description'))
+        if(static::hasMeta($record, 'description'))
         {
             $header->addMetaDescription(
                 $record['meta_description'],
                 ($record['meta_description_overwrite'] == 'Y')
             );
         }
-        if(self::hasMeta($record, 'keywords'))
+        if(static::hasMeta($record, 'keywords'))
         {
             $header->addMetaKeywords(
                 $record['meta_keywords'],
@@ -194,7 +194,7 @@ class Shortcuts
         }
 
         if (isset($record['meta_data'])) {
-            self::setMetaData($record['meta_data'], $header);
+            static::setMetaData($record['meta_data'], $header);
         }
     }
 
