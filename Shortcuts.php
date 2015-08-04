@@ -24,7 +24,7 @@ class Shortcuts
      * Set it as "url callback" of a BackendMetaObject:
      *
      *        $this->meta->setUrlCallback(
-     *            'Utils\Fork\Shortcuts', // TODO this or just 'Shortcuts'?
+     *            'Knife\Shortcuts',
      *            'makeUniqueSlug',
      *            array('blog_posts', $this->record['id'])
      *        );
