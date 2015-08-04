@@ -171,21 +171,21 @@ class Shortcuts
      */
     public static function setMetaFromRecord(\Header $header, array $record)
     {
-        if(isset($record['meta_title']) && isset($record['meta_title_overwrite']))
+        if(self::hasMeta($record, 'title'))
         {
             $header->setPageTitle(
                 $record['meta_title'],
                 ($record['meta_title_overwrite'] == 'Y')
             );
         }
-        if(isset($record['meta_description']) && isset($record['meta_description_overwrite']))
+        if(self::hasMeta($record, 'description'))
         {
             $header->addMetaDescription(
                 $record['meta_description'],
                 ($record['meta_description_overwrite'] == 'Y')
             );
         }
-        if(isset($record['meta_keywords']) && isset($record['meta_keywords_overwrite']))
+        if(self::hasMeta($record, 'keywords'))
         {
             $header->addMetaKeywords(
                 $record['meta_keywords'],
@@ -193,21 +193,43 @@ class Shortcuts
             );
         }
 
-        if(isset($record['meta_data']['seo_index']))
+        if (isset($record['meta_data'])) {
+            self::setMetaData($record['meta_data'], $header);
+        }
+    }
+
+    /**
+     * @param array $record The record to check for a meta value.
+     * @param string $meta The meta value name; keywords,description, title.
+     * @return bool Whether or not the record has a value for the given meta.
+     */
+    private static function hasMeta($record, $meta)
+    {
+        return isset($record["meta_{$meta}"])
+            && isset($record["meta_{$meta}_overwrite"]);
+    }
+
+    /**
+     * @param array $metaData The meta data to set if possible.
+     * @param Header $header Header object to set the meta data on.
+     */
+    private static function setMetaData($metaData, $header)
+    {
+        if(isset($metaData['seo_index']))
         {
             $header->addMetaData(
                 array(
                     'name' => 'robots',
-                    'content' => $record['meta_data']['seo_index']
+                    'content' => $metaData['seo_index']
                 )
             );
         }
-        if(isset($record['meta_data']['seo_follow']))
+        if(isset($metaData['seo_follow']))
         {
             $header->addMetaData(
                 array(
                     'name' => 'robots',
-                    'content' => $record['meta_data']['seo_follow']
+                    'content' => $metaData['seo_follow']
                 )
             );
         }
