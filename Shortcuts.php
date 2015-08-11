@@ -203,7 +203,7 @@ class Shortcuts
      * @param string $meta The meta value name; keywords,description, title.
      * @return bool Whether or not the record has a value for the given meta.
      */
-    private static function hasMeta($record, $meta)
+    protected static function hasMeta($record, $meta)
     {
         return isset($record["meta_{$meta}"])
             && isset($record["meta_{$meta}_overwrite"]);
@@ -213,7 +213,7 @@ class Shortcuts
      * @param array $metaData The meta data to set if possible.
      * @param Header $header Header object to set the meta data on.
      */
-    private static function setMetaData($metaData, $header)
+    protected static function setMetaData($metaData, $header)
     {
         if(isset($metaData['seo_index']))
         {
