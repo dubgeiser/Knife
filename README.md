@@ -5,6 +5,9 @@ Fork additions.
 Knife started out as an extraction of code from my personal-just-for-learning
 library.
 
+## End of life (2018-08-06)
+I am no longer maintaining this software, I'm leaving it up here for the time being, but please be aware that I'll be taking this off-line in the future.
+
 
 ## Install
 
